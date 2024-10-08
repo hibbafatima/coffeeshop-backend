@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
 
+  def new
+    @customer = Customer.new
+  end
+
   def create
     @customer = Customer.new(customer_params)
 
     if @customer.save
-      render json: @customer, status: :created
+      redirect_to items_path
     else
       render json: @customer.errors, status: :unprocessable_entity
     end
