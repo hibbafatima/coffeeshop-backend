@@ -1,25 +1,25 @@
 class UsersController < ApplicationController
 
   def new
-    @customer = Customer.new
+    @user = User.new
   end
 
   def create
-    @customer = Customer.new(customer_params)
+    @user = User.new(user_params)
 
-    if @customer.save
+    if @user.save
       redirect_to items_path
     else
-      render json: @customer.errors, status: :unprocessable_entity
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
   private
-  def set_customer
-    @customer = Customer.find(params[:id])
+  def set_user
+    @user = User.find(params[:id])
   end
 
-  def customer_params
-    params.require(:customer).permit(:name, :email)
+  def user_params
+    params.require(:user).permit(:name, :email)
   end
 end
