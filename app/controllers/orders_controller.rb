@@ -10,10 +10,12 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
+    byebug
+    @order = Order.new({user_id: order_params[:user_id]})
     # Build associated order items for the selected item Ids
-    if params[:order][:item_ids].present?
-      params[:order][:item_ids].each do |item_id|
+    if order_params[:order_items].present?
+      order_params[:order_items].each do |item_id|
+        byebug
         item = Item.find(item_id)
         @order.order_items.build(
           item: item,
@@ -23,9 +25,9 @@ class OrdersController < ApplicationController
         )
       end
     end
-    
+    byebug
     if @order.save
-      redirect_to @order, notice: "Order placed successfully!"
+      redirect_to user_order_path(@user, @order), notice: "Order placed successfully!"
     else
       render :new
     end
@@ -35,7 +37,7 @@ class OrdersController < ApplicationController
   
   def order_params
     byebug
-    params.require(:orders).permit(:customer_id, items: [:id, :name, :price])
+    params.require(:orders).permit(:user_id, order_items: [])
   end
 
   def calculate_tax_rate(item)
