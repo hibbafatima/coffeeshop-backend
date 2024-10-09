@@ -34,7 +34,8 @@ class OrdersController < ApplicationController
   private
   
   def order_params
-    params.require(:order).permit(:customer_id)
+    byebug
+    params.require(:orders).permit(:customer_id, items: [:id, :name, :price])
   end
 
   def calculate_tax_rate(item)
