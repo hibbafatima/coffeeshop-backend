@@ -8,4 +8,5 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show, :new, :create]
   end
   resources :items, only: [:index]
+  resources :locations, only: [:index]
 end
