@@ -1,5 +1,3 @@
-### Backend README (Rails)
-
 # Coffee Shop Backend
 
 This is the backend API for the Coffee Shop project built with Ruby on Rails. It provides the API for managing coffee shop items and user orders.
