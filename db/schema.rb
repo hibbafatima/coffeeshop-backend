@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_09_151602) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_09_153506) do
   create_table "item_tax_categories", force: :cascade do |t|
     t.integer "item_id", null: false
     t.integer "tax_category_id", null: false
@@ -68,7 +68,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_09_151602) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "Location"
+    t.integer "location_id", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["location_id"], name: "index_users_on_location_id"
   end
 
   add_foreign_key "item_tax_categories", "items"
@@ -76,4 +79,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_09_151602) do
   add_foreign_key "order_items", "items"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "users"
+  add_foreign_key "users", "locations"
 end

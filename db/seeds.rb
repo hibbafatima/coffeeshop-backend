@@ -7,15 +7,22 @@
 #   Character.create(name: "Luke", movie: movies.first)
 # db/seeds.rb
 
-User.delete_all
+ItemTaxCategory.delete_all
 Item.delete_all
 TaxCategory.delete_all
-ItemTaxCategory.delete_all
 Location.delete_all
 
-# Create Users
-user1 = User.create(name: 'Alice Johnson', email: 'alice@example.com')
-user2 = User.create(name: 'Bob Smith', email: 'bob@example.com')
+#Create Locations
+Location.create(name: 'New York')
+Location.create(name: 'Los Angeles')
+Location.create(name: 'Chicago')
+Location.create(name: 'Houston')
+Location.create(name: 'Phoenix')
+Location.create(name: 'Philadelphia')
+Location.create(name: 'San Antonio')
+Location.create(name: 'San Diego')
+Location.create(name: 'Dallas')
+Location.create(name: 'San Jose')
 
 # Create Items
 item1 = Item.create(name: 'Espresso', description: 'Lorem ipsum dolor sit amet', price: 2.50)
@@ -37,15 +44,6 @@ ItemTaxCategory.create(item: item4, tax_category: tax_category1)
 ItemTaxCategory.create(item: item5, tax_category: tax_category1)
 ItemTaxCategory.create(item: item6, tax_category: tax_category2)
 
-Location.create(name: 'New York')
-Location.create(name: 'Los Angeles')
-Location.create(name: 'Chicago')
-Location.create(name: 'Houston')
-Location.create(name: 'Phoenix')
-Location.create(name: 'Philadelphia')
-Location.create(name: 'San Antonio')
-Location.create(name: 'San Diego')
-Location.create(name: 'Dallas')
-Location.create(name: 'San Jose')
+
 
 puts "Seed data created successfully!"
