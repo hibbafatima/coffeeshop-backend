@@ -33,4 +33,15 @@ ItemTaxCategory.create(item: item5, location: location2, tax_rate: 12.5)
 ItemTaxCategory.create(item: item6, location: location1, tax_rate: 11.5)
 ItemTaxCategory.create(item: item6, location: location2, tax_rate: 14.5)
 
+discount_rule_1 = DiscountRule.create
+DiscountRuleTriggerItem.create(discount_rule_id: discount_rule_1.id, item_id: item1.id)
+DiscountRuleTriggerItem.create(discount_rule_id: discount_rule_1.id, item_id: item2.id)
+DiscountRuleDiscountedItem.create(discount_rule_id: discount_rule_1.id, item_id: item3.id, percentage: 100)
+
+discount_rule_2 = DiscountRule.create
+DiscountRuleTriggerItem.create(discount_rule_id: discount_rule_2.id, item_id: item4.id)
+DiscountRuleTriggerItem.create(discount_rule_id: discount_rule_2.id, item_id: item5.id)
+DiscountRuleDiscountedItem.create(discount_rule_id: discount_rule_2.id, item_id: item6.id, percentage: 100)
+DiscountRuleDiscountedItem.create(discount_rule_id: discount_rule_2.id, item_id: item1.id, percentage: 50)
+
 puts "Seed data created successfully!"
