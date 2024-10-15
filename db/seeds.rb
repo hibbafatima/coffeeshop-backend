@@ -7,22 +7,9 @@
 #   Character.create(name: "Luke", movie: movies.first)
 # db/seeds.rb
 
-ItemTaxCategory.delete_all
-Item.delete_all
-TaxCategory.delete_all
-Location.delete_all
-
 #Create Locations
-Location.create(name: 'New York')
-Location.create(name: 'Los Angeles')
-Location.create(name: 'Chicago')
-Location.create(name: 'Houston')
-Location.create(name: 'Phoenix')
-Location.create(name: 'Philadelphia')
-Location.create(name: 'San Antonio')
-Location.create(name: 'San Diego')
-Location.create(name: 'Dallas')
-Location.create(name: 'San Jose')
+location1 = Location.create(name: 'New York')
+location2 = Location.create(name: 'Los Angeles')
 
 # Create Items
 item1 = Item.create(name: 'Espresso', description: 'Lorem ipsum dolor sit amet', price: 2.50)
@@ -32,18 +19,18 @@ item4 = Item.create(name: 'Mocha', description: 'Lorem ipsum dolor sit amet', pr
 item5 = Item.create(name: 'Cold Brew', description: 'Lorem ipsum dolor sit amet', price: 3.00)
 item6 = Item.create(name: 'Croissant', description: 'Lorem ipsum dolor sit amet', price: 2.00)
 
-# Create Tax Categories
-tax_category1 = TaxCategory.create!(name: 'Standard', discount_rate: 0.0)
-tax_category2 = TaxCategory.create!(name: 'Reduced', discount_rate: 5.0)
-
 # Associate Items with Tax Categories
-ItemTaxCategory.create(item: item1, tax_category: tax_category1)
-ItemTaxCategory.create(item: item2, tax_category: tax_category1)
-ItemTaxCategory.create(item: item3, tax_category: tax_category1)
-ItemTaxCategory.create(item: item4, tax_category: tax_category1)
-ItemTaxCategory.create(item: item5, tax_category: tax_category1)
-ItemTaxCategory.create(item: item6, tax_category: tax_category2)
-
-
+ItemTaxCategory.create(item: item1, location: location1, tax_rate: 15.5)
+ItemTaxCategory.create(item: item1, location: location2, tax_rate: 14.5)
+ItemTaxCategory.create(item: item2, location: location1, tax_rate: 13.5)
+ItemTaxCategory.create(item: item2, location: location2, tax_rate: 4.5)
+ItemTaxCategory.create(item: item3, location: location1, tax_rate: 65.5)
+ItemTaxCategory.create(item: item3, location: location2, tax_rate: 4.5)
+ItemTaxCategory.create(item: item4, location: location1, tax_rate: 6.5)
+ItemTaxCategory.create(item: item4, location: location2, tax_rate: 7.5)
+ItemTaxCategory.create(item: item5, location: location1, tax_rate: 13.5)
+ItemTaxCategory.create(item: item5, location: location2, tax_rate: 12.5)
+ItemTaxCategory.create(item: item6, location: location1, tax_rate: 11.5)
+ItemTaxCategory.create(item: item6, location: location2, tax_rate: 14.5)
 
 puts "Seed data created successfully!"
