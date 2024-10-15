@@ -10,7 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< Updated upstream
 ActiveRecord::Schema[7.0].define(version: 2024_10_09_153506) do
+=======
+ActiveRecord::Schema[7.0].define(version: 2024_10_15_215314) do
+  create_table "discount_rule_discounted_items", force: :cascade do |t|
+    t.integer "discount_rule_id", null: false
+    t.integer "item_id", null: false
+    t.decimal "percentage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["discount_rule_id"], name: "index_discount_rule_discounted_items_on_discount_rule_id"
+    t.index ["item_id"], name: "index_discount_rule_discounted_items_on_item_id"
+  end
+
+  create_table "discount_rule_trigger_items", force: :cascade do |t|
+    t.integer "discount_rule_id", null: false
+    t.integer "item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["discount_rule_id"], name: "index_discount_rule_trigger_items_on_discount_rule_id"
+    t.index ["item_id"], name: "index_discount_rule_trigger_items_on_item_id"
+  end
+
+  create_table "discount_rules", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+>>>>>>> Stashed changes
   create_table "item_tax_categories", force: :cascade do |t|
     t.integer "item_id", null: false
     t.integer "tax_category_id", null: false
