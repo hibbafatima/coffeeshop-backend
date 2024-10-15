@@ -47,7 +47,6 @@ class Order < ApplicationRecord
       # Check if all trigger items are present in the cart for combo offers
       if (trigger_item_ids - order_items_id).empty?
         order_items.each do |order_item|
-          byebug
           discounted_item_ids = discount_rule.discount_rule_discounted_items.map(&:item_id)
           if discounted_item_ids.include?(order_item.item_id)
             discounted_price = calculate_discounted_price(order_item.item, order_items_id, discount_rule, discounted_item_ids)
@@ -60,7 +59,6 @@ class Order < ApplicationRecord
   end
 
   def calculate_discounted_price(current_item, order_items_id, discount_rule, discounted_item_ids)
-    byebug
     if (discounted_item_ids - order_items_id).empty? #check if all discounted items from combo offer are present in order
       discount_percentage = DiscountRuleDiscountedItem.find_by(discount_rule_id: discount_rule.id, item_id: current_item.id).percentage
       if discount_percentage == 100
