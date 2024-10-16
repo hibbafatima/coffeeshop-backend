@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_15_202722) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_15_215314) do
   create_table "discount_rule_discounted_items", force: :cascade do |t|
     t.integer "discount_rule_id", null: false
     t.integer "item_id", null: false
@@ -70,7 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_15_202722) do
     t.integer "quantity", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "discounted_price", default: "0.0"
+    t.decimal "discounted_price"
     t.index ["item_id"], name: "index_order_items_on_item_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
   end
@@ -81,7 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_15_202722) do
     t.boolean "is_completed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "total_discounted_price", default: "0.0"
+    t.decimal "total_discounted_price", precision: 5, scale: 2
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

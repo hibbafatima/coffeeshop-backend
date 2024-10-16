@@ -23,6 +23,8 @@ class Order < ApplicationRecord
   end
 
   def update_total_discounted_price
+    return unless order_items.any? { |order_item| order_item.discounted_price.present? } 
+
     update_column(:total_discounted_price, calculate_order_total_discounted_price)
     
   end
@@ -30,7 +32,11 @@ class Order < ApplicationRecord
   def calculate_order_total_discounted_price
     order_items.inject(0) do |sum, order_item|
       item_tax = order_item.price * order_item.tax_rate / 100
-      item_total = (order_item.discounted_price + item_tax) * order_item.quantity
+      if order_item.discounted_price.present?
+        item_total = (order_item.discounted_price + item_tax) * order_item.quantity
+      else
+        item_total = (order_item.price + item_tax ) * order_item.quantity
+      end
       sum + item_total
     end
   end
@@ -52,7 +58,9 @@ class Order < ApplicationRecord
             discounted_price = calculate_discounted_price(order_item.item, order_items_id, discount_rule, discounted_item_ids)
           end
     
-          discounted_price.present? ? order_item.update(discounted_price: discounted_price) : order_item.update(discounted_price: order_item.price)
+          if discounted_price.present?
+            order_item.update(discounted_price: discounted_price)
+          end
         end
       end
     end
@@ -68,6 +76,6 @@ class Order < ApplicationRecord
       end
     end
     
-    current_item.price # Return original price if no discount applies
+    nil # Return original price if no discount applies
   end
 end

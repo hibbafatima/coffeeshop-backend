@@ -12,13 +12,13 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new({user_id: order_params[:user_id]})
     if order_params[:order_items].present?
-      order_params[:order_items].each do |item_id|
-        item = Item.find(item_id)
+      order_params[:order_items].each do |item|
+         selected_item = Item.find(item[:item_id])
         @order.order_items.build(
-          item: item,
-          quantity: 1, #default quantity set to 1 later update to handle dynamic user given quantities
-          price: item.price,
-          tax_rate: calculate_tax_rate(item)          
+          item: selected_item,
+          quantity: item[:quantity], #default quantity set to 1 later update to handle dynamic user given quantities
+          price: selected_item.price,
+          tax_rate: calculate_tax_rate(selected_item)          
         )
       end
     end
@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
   private
   
   def order_params
-    params.require(:orders).permit(:user_id, order_items: [])
+    params.require(:orders).permit(:user_id, order_items: [:item_id, :quantity])
   end
 
   def calculate_tax_rate(item)
