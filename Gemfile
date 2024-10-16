@@ -48,3 +48,5 @@ end
 
 gem 'rack-cors'
 gem 'byebug'
+gem 'sidekiq'
+

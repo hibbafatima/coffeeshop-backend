@@ -30,6 +30,13 @@ class OrdersController < ApplicationController
     end
   end
 
+  def send_notification
+    order = Order.find(params[:id])
+    SendNotificationJob.set(wait: 2.minutes).perform_later(order)
+
+    render json: { message: 'Payment processed and notification scheduled.' }, status: :ok
+  end
+
   private
   
   def order_params

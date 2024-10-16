@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   # root "articles#index"
   root "items#index"
   resources :users, only: [:new, :create] do
-    resources :orders, only: [:index, :show, :new, :create]
+    resources :orders, only: [:index, :show, :new, :create] do
+      member do
+        post :send_notification
+      end
+    end
   end
   resources :items, only: [:index]
   resources :locations, only: [:index]
